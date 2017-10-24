@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Attempt;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AttemptController extends Controller
 {
@@ -22,7 +23,12 @@ class AttemptController extends Controller
   		public function index()
   		{
 
-  			$intentos = Attempt::all();
+        $intentos =  DB::table('attempts')
+                 ->select('*', DB::raw('SUM(point) AS points'))
+                 ->groupBy('id_facebook')
+                 ->orderBy('points', 'DESC')
+                 ->get();
+
   			if(!$intentos){
   				return response()->json(['data' => $intentos, 'codigo' => 'Error 404'], 404);
   			}
@@ -53,6 +59,7 @@ class AttemptController extends Controller
     		}
 
     		Attempt::create($req->all());
+
     		return response()->json([
     			'data' => 'Los intentos han sido registrados'
     		], 200) ;
@@ -65,7 +72,15 @@ class AttemptController extends Controller
   		 */
   		public function show($id)
   		{
+        $intentos =  DB::table('attempts')
+                 ->select('*', DB::raw('SUM(point) AS points'))
+                 ->where('id_facebook',  $id)
+                 ->get();
 
+        if(!$intentos){
+          return response()->json(['data' => $intentos, 'codigo' => 'Error 404'], 404);
+        }
+        return response()->json(['data' => $intentos], 200) ;
   		}
   		/**
   		 * Show the form for editing the specified resource.
@@ -97,4 +112,5 @@ class AttemptController extends Controller
   		{
   			return "eliminando vehiculo->$id";
   		}
+
 }
