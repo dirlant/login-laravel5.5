@@ -9,7 +9,7 @@ class CreateSocialFacebookAccountsTable extends Migration
 
     public function up()
     {
-        Schema::create('facebook_login', function (Blueprint $table) {
+        Schema::create('social_facebook_accounts', function (Blueprint $table) {
           $table->integer('user_id');
           $table->string('provider_user_id');
           $table->string('provider');
@@ -19,6 +19,6 @@ class CreateSocialFacebookAccountsTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('facebook_login');
+        Schema::dropIfExists('social_facebook_accounts');
     }
 }

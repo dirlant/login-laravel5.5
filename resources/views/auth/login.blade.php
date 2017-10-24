@@ -1,4 +1,26 @@
+
+
 @extends('layouts.app')
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '138343613387436',
+      xfbml      : true,
+      version    : 'v2.10'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
 
 @section('content')
 <div class="container">
@@ -66,6 +88,13 @@
                             <div class="col-md-8 col-md-offset-4">
                               <a href="{{url('/redirect')}}" class="btn btn-primary">Login with Facebook</a>
                             </div>
+                        </div>
+
+                        <div
+                          class="fb-like"
+                          data-share="true"
+                          data-width="450"
+                          data-show-faces="true">
                         </div>
                     </form>
                 </div>
