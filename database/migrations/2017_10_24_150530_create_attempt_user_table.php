@@ -15,8 +15,7 @@ class CreateAttemptUserTable extends Migration
     {
       Schema::create('attempts', function (Blueprint $table) {
         $table->increments('id');
-        $table->string('id_facebook');
-        $table->string('name_facebook');
+        $table->integer('users_id');
         $table->integer('words_count');
         $table->integer('point');
         $table->timestamps();

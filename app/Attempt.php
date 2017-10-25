@@ -8,7 +8,7 @@ class Attempt extends Model {
   // Attempt = Intento
 
   public $fillable = [
-    'id_facebook', 'name_facebook', 'words_count', 'point',
+    'users_id', 'words_count', 'point',
   ];
 
   protected $hidden = ['created_at', 'updated_at'];

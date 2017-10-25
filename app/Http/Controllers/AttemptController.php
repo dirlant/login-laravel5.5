@@ -25,7 +25,7 @@ class AttemptController extends Controller
 
         $intentos =  DB::table('attempts')
                  ->select('*', DB::raw('SUM(point) AS points'))
-                 ->groupBy('id_facebook')
+                 ->groupBy('users_id')
                  ->orderBy('points', 'DESC')
                  ->get();
 
@@ -74,7 +74,7 @@ class AttemptController extends Controller
   		{
         $intentos =  DB::table('attempts')
                  ->select('*', DB::raw('SUM(point) AS points'))
-                 ->where('id_facebook',  $id)
+                 ->where('users_id',  $id)
                  ->get();
 
         if(!$intentos){
